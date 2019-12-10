@@ -1,28 +1,4 @@
-@media only screen and (max-width: 380px) {
-    body {
-      background-color: lightblue;
-    }
 
-    .settings{
-        padding-right: unset; 
-        padding-left: unset;
-        width: unset;
-    }
-   .result{
-    padding-right: unset;  
-    padding-left: unset;
-    /* padding-left: 25%; */
-   }
-   .result-ul{
-    padding-left: 27%;
-   }
-   .card{
-    width: 100%;
-   }
-   .card img{
-    width: 100%;
-   }
-  }
 
   @media only screen and (max-width: 415px) {
     body {
@@ -49,6 +25,11 @@
    }
    .card img{
     width: 100%;
+   }
+   #txtArea1{
+    width: 15em;
+    
+    margin-left: -53px;
    }
   }
 

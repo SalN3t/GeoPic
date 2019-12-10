@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>GeoPic</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+<!-- bootstrap -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/www/css/bootstrap-tagsinput.css"/>
+ -->
+ <!-- <link rel="stylesheet" href="/www/css/bootstrap-slider.css"/> -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/css/bootstrap-slider.css" integrity="sha256-+bpMasWDxDlsVpNW3oZlL7L4RacwsP70u2fZt6Rxrmc=" crossorigin="anonymous" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+		<!-- <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      
+      
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/fontawesome-stars.css" integrity="sha256-7XbHJ8LVy7s+vmzmqyO5aLt9Ak1Kx8psBk61OfKbUL0=" crossorigin="anonymous" /> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+
+        <!-- Latest compiled and minified Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <style>
+        .header{
+            background: #efefef;
+    font-size: 50px;
+    color: #6c757d;
+    padding: 1em;
+    text-align: center;
+        }
+        .settings{
+            background: #6e6e6e;
+ 
+    color: #dce0e4;
+    padding: 1em;
+    padding-right: 20em;
+    padding-left: 20em;
+    text-align: center;
+        }
+        .result{
+            background: #c9c8c8;
+ 
+    color: #626364;
+    padding: 1em;
+    padding-right: 20em;
+    padding-left: 20em;
+    text-align: center;
+        }
+        #ex1Slider .slider-selection {
+	background: #BABABA;
+}
+
+.br-theme-bars-reversed .br-widget a {
+  background-color: pink;
+}
+
+.br-theme-bars-reversed .br-widget a.br-active,
+.br-theme-bars-reversed .br-widget a.br-selected {
+  background-color: #ff446a;
+}
+
+.br-theme-bars-reversed .br-widget .br-current-rating {
+  color: #ff446a;
+  font-size: 20px;  
+}
+
+
+
+/* Style the Image Used to Trigger the Modal */
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000;/* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  height: 80%;
+}
+.modal-content-star {
+  margin: auto;
+  
+
+ 
+}
+
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+.result-ul{
+  width: 100%;padding-right: 5%;padding-left: 38%;margin-right: auto;margin-left: auto;
+}
+footer{
+    background: darkslategray;
+    color: white;
+    padding: 7em;
+    text-align: center;
+}
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+        </style>
+        <link rel="stylesheet" href="www/css/mobile.css">
+</head>
+<body>
+    <div class="">
+        <div class="header">
+            <img src="www/images/logo.png">
+            <p>GeoPic</p>
+        </div>
+    </div>
+
+
+     
+      
+       
+
+    <div class="">
+            <div id="mapid" style="width: 100%; height: 450px;"></div>
+    </div>
+
+    <div class="  settings">
+        <h1> Settings</h1>
+        <div style="width: 34%;margin: 0 auto;">
+                
+                <div class="form-group">
+                        <label for="exampleInputEmail1">Radius</label>
+                        <br>
+                  <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> -->
+                  <!-- <input id="radius" type="number" class="form-control"  placeholder="radius"> -->
+                  <input id="radius" type="text" data-slider-id='ex1Slider'  data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="3"/>
+                  <span id="ex6CurrentSliderValLabel">Current Slider Value: <span id="ex6SliderVal">3</span></span>                        </div>
+                <div class="form-group">
+                        <label for="exampleInputEmail1">Tags</label>
+                        <br>
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                  <input id="txtArea1" type="text" class="form-control"  placeholder="tags">
+                </div>
+                <button id="btnTxt" class="btn btn-primary">Update</button>
+                <div class="form-group">
+                <span >Total Photos Found: <span id="totalFoundPictures">0</span></span>   
+              </div>
+              
+       
+    </div>
+    
+</div>
+
+<div class="" style="text-align: center">
+    <div class="result">
+        <h1> Results</h1>
+        <br>
+    
+    <br>
+    <!-- Nav pills -->
+    <ul class="nav nav-pills result-ul" role="tablist" >
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="pill" href="#home">Explore</a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#menu1">Geo Rated</a>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" id="menuTotalRating" href="#menu2">Top Rated</a>
+      </li>
+    </ul>
+</div>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div id="home" class=" tab-pane active"><br>
+        <h3>Explore</h3>
+        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
+        <div class="container-fluid text-center image-results-view" style="margin-bottom: 5em">
+
+            <!-- <h1>Results</h1> -->
+            
+            <div class="images"></div>
+          </div>
+      </div>
+      <!-- <div id="menu1" class=" tab-pane fade"><br>
+        <h3>Menu 1</h3>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div> -->
+      <div id="menu2" class=" tab-pane fade"><br>
+        <h3>Top Rated</h3>
+        <!-- <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p> -->
+        <div class="container-fluid text-center image-results-view row" id="totalRatingShowResult">
+             
+                                            
+        
+                    </div>
+      </div>
+    </div>
+  </div>
+
+
+ 
+
+          
+<footer>
+    All right recived to @Salah Alarfaj
+</footer>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- The Close Button -->
+    <span class="close">&times;</span>
+    <div class="modal-content-star" id="rateYoModel"></div>
+    <!-- Modal Content (The Image) -->
+    <img class="modal-content" id="img01">
+  
+    <!-- Modal Caption (Image Text) -->
+    <div id="caption"></div>
+    <input type="hidden" id="coord">
+  </div>
+
+    <!-- js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="./Config.js"></script>
+    <script src="./searchOptions.js"></script>
+
+  <!-- Firebase CDN -->
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
+  <!-- <script src="./www/js/bootstrap-slider.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+ <!-- Popper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <!-- <script src="/www/js/bootstrap-tagsinput.js"></script> -->
+  <!-- <script src="/www/js/typeahead.bundle.js"></script> -->
+  <!-- <script src="js/app.js"></script> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js" integrity="sha256-4G5fW5q6We2bsDSgLCwkfKMFvGx/SbRsZkiNZbhXCvM=" crossorigin="anonymous"></script> -->
+
+  <!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+
+  <script src="./Main.js"></script>
+<script>
+//   $(function() {
+//       $('#example').barrating({
+//         theme: 'fontawesome-stars'
+//       });
+//    });
+
+let allMsgs ;
+var marker = undefined;
+function showOnMap(lat,lon){
+    if(marker != undefined)mymap.removeLayer(marker);
+    marker = new L.marker([lat, lon]);
+    marker.addTo(mymap);
+}
+function bigImg(x) {
+    x.css("height",'200px');
+    x.css("width",'200px');
+//   x.style.height = "64px";
+//   x.style.width = "64px";
+}
+
+function normalImg(x) {
+    x.css("height",'32px');
+    x.css("width",'32px');
+//   x.style.height = "32px";
+//   x.style.width = "32px";
+}
+   //Make sure that the dom is ready
+$(function () {
+ $("#txtArea1").val("#"+searchOptions.tags);
+ 
+ $("#rateYo").rateYo({
+   rating: 3.6,
+   readOnly: true,
+   onSet: function (rating, rateYoInstance) {
+ 
+ //alert("Rating is set to: " + rating);
+}
+ });
+
+
+
+ $("#rateYoModel").rateYo({
+   //rating: 3.6,
+   
+   onSet: function (rating, rateYoInstance) {
+    if(rating > 0){
+      let elemDB = undefined;
+      var elemId = undefined;
+      firebase.app().database().ref("pictureRating").orderByChild("url").equalTo(
+        $("#rateYoModel").val()
+      ).once("value", snp => elemDB = snp.val()).then( ()=>{
+
+   
+    //modelElem["url"]= alert("url: " + $("#rateYoModel").val());
+    
+      if(elemDB != undefined){
+         elemId = Object.keys(elemDB)[0];
+      }
+        RateIt(elemId, rating,{
+          "url":$("#rateYoModel").val(),
+          "lat":$("#coord").val().split(",")[0],
+          "lon":$("#coord").val().split(",")[1],
+        }, elemDB);
+        $("#rateYoModel").html("<p style='font-size:18px;color:white'> Your Rating: <g style='font-size:24px;color:white'>"+rating+"</g></p>");
+      //alert("Rating is set to: " + rating);
+      
+      } );
+  
+ //alert("url: " + $("#rateYoModel").val());
+    }
+
+
+ //rating = 0.0;
+}
+ });
+
+
+
+ /// menu 2 
+ $("#menuTotalRating").on('click',function(){
+  $("#totalRatingShowResult").html("");
+  console.log("m3");
+//  firebase.app().database().ref("pictureRating").orderByChild("orderScore").on('value', function(resu){ 
+    firebase.app().database().ref("pictureRating").on('value', function(resu){ 
+
+    allMsgs = resu.val();
+   //allMsgs.sort(function(a,b){return b["orderScore"] - a["orderScore"]});
+      let sortedKeys = Object.keys(allMsgs).sort(function(a,b){return allMsgs[a]["orderScore"]- allMsgs[b]["orderScore"]});
+   for(let msg in sortedKeys) 
+   {
+    // <div class="col-md-2">
+    //<div class="card" style="width: 18rem;">
+    //<img src="https://live.staticflickr.com/4100/4800861724_1f82c78bd4_n.jpg" class="card-img-top" style="width: 286px;height: 232px;"  alt="hello">
+    //<div class="card-body">
+    //<div class="modal-content-star" id="rateYoo"></div>
+    //<!-- <h5 class="card-title">Card title</h5> -->
+    //<p class="card-title"><b>Total Voters:</b>244</p>
+    //<!-- dd.substr(0,60) -->
+    //<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    //<a href="#" onclick="showOnMap(25.403585, 46.40625)" class="btn btn-primary">See on Map</a>
+    //</div>
+    //</div>
+    //</div>
+    let $mainDiv = $("<div></div>");
+    $mainDiv.attr('class',"col-md-2");
+    let $cardDiv = $("<div></div>");
+    $cardDiv.attr('class',"card");
+    $cardDiv.attr('style',"width: 18rem");
+
+    let $img = $("<img></img>");
+    $img.attr('src',allMsgs[sortedKeys[msg]].url);
+    $img.attr('class',"card-img-top");
+    $img.attr('style',"width: 286px;height: 232px");
+
+    let $cardBodyDiv = $("<div></div>");
+    $cardBodyDiv.attr('class',"card-body");
+
+    let $ratingyDiv = $("<div></div>");
+    $ratingyDiv.attr('class',"modal-content-star");
+    $ratingyDiv.attr('id',"rateYo_"+sortedKeys[msg]);
+
+
+
+    
+    let $totalVoteP = $("<p></p>");
+    $totalVoteP.attr('class',"card-title");
+    $totalVoteP.html("<b> Total Voters: </b>"+allMsgs[sortedKeys[msg]].totalPeople);
+
+    let $a = $("<a></a>");
+    $a.attr('class',"btn btn-primary");
+    $a.html("<b> See on Map </b>");
+    $a.on("click",function(){
+      showOnMap(parseFloat(allMsgs[sortedKeys[msg]].lat), parseFloat(allMsgs[sortedKeys[msg]].lon))
+      $("#mapid").focus();
+    });
+
+    $cardBodyDiv.append($ratingyDiv);
+    $cardBodyDiv.append($totalVoteP);
+    $cardBodyDiv.append($a);
+
+    $cardDiv.append($img);
+    $cardDiv.append($cardBodyDiv);
+
+    $mainDiv.append($cardDiv);
+
+    $("#totalRatingShowResult").append($mainDiv);
+    // $("#rateYoModel").val(url);
+    //           $("#rateYoModel").rateYo.rating = 0.0;
+    //           $("#coord").val(searchOptions.lat+","+searchOptions.lon);
+              
+    //         $("#img01").attr('src',url);
+    //         $("#caption").html(title);
+          
+    //         $('.images').append(element);
+    console.log( allMsgs[sortedKeys[msg]].rating);
+    $("#rateYo_"+sortedKeys[msg]).rateYo({
+      rating: parseFloat(allMsgs[sortedKeys[msg]].rating),
+   readOnly: true,
+    });
+     } 
+  });
+});
+
+});
+// // With JQuery
+// $('#ex1').slider({
+// 	formatter: function(value) {
+// 		return 'Current value: ' + value;
+// 	}
+// });
+
+// // Without JQuery
+// var slider = new Slider('#ex1', {
+// 	formatter: function(value) {
+//         console.log(value)
+// 		return 'Current value: ' + value;
+// 	}
+// });
+
+
+// // Without JQuery
+
+
+// Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+ // modal.style.display = "none";
+  $("#myModal").css('display', "none");
+  $("#rateYoModel").rateYo( "rating", "0");
+}
+
+
+</script>
+
+
+</body>
+</html>

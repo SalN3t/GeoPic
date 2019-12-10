@@ -201,6 +201,7 @@ var marker = undefined;
 function showOnMap(lat,lon){
     if(marker != undefined)mymap.removeLayer(marker);
     marker = new L.marker([lat, lon]);
+    marker.bindPopup("<b>Here</b>");
     marker.addTo(mymap);
 }
 function bigImg(x) {
@@ -323,6 +324,7 @@ $(function () {
     $a.on("click",function(){
       showOnMap(parseFloat(allMsgs[sortedKeys[msg]].lat), parseFloat(allMsgs[sortedKeys[msg]].lon))
       $("#mapid").focus();
+      marker.openPopup();
     });
 
     $cardBodyDiv.append($ratingyDiv);
